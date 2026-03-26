@@ -1,0 +1,21 @@
+# Step 2: Dockerfile for KarthikShop E-Commerce App
+# Base Image
+FROM nginx:alpine
+
+# Author Info
+LABEL maintainer="Karthik R"
+LABEL project="KarthikShop E-Commerce"
+LABEL version="1.0"
+
+# Remove default nginx page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy our app code to nginx
+COPY index.html /usr/share/nginx/html/index.html
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx server
+CMD ["nginx", "-g", "daemon off;"]
+

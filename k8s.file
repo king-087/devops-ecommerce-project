@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karthikshop-deployment
+  labels:
+    app: karthikshop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: karthikshop
+  template:
+    metadata:
+      labels:
+        app: karthikshop
+    spec:
+      containers:
+      - name: karthikshop-container
+        image: <your-docker-image>
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: karthikshop-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: karthikshop
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
